@@ -1,359 +1,155 @@
-/* =============================================
-   SQUEAKY CLEAN — Main JS
-   Three.js 3D hero + UI interactions
-   ============================================= */
+/* =================================================
+   SQUEAKY CLEAN — Interactions + calm 3D hero
+   ================================================= */
 
-/* --- THREE.JS HERO SCENE --- */
-(function initThreeScene() {
-  const canvas = document.getElementById('hero-canvas');
+/* ---------- 3D HERO: drifting soap bubbles ---------- */
+(function scene() {
+  const canvas = document.getElementById('scene');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  const W = window.innerWidth;
-  const H = window.innerHeight;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Renderer */
+  let W = window.innerWidth, H = window.innerHeight;
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
 
-  /* Scene & Camera */
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 200);
-  camera.position.set(0, 0, 14);
+  const sc = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+  cam.position.z = 16;
 
-  /* Lights */
-  scene.add(new THREE.AmbientLight(0x0a1830, 2));
+  // Soft, warm light to match the bone palette
+  sc.add(new THREE.AmbientLight(0xffffff, 1.1));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4);
+  key.position.set(6, 8, 10);
+  sc.add(key);
+  const teal = new THREE.PointLight(0x15a8a3, 4, 40);
+  teal.position.set(-8, -2, 6);
+  sc.add(teal);
 
-  const light1 = new THREE.PointLight(0x06b6d4, 5, 40);
-  light1.position.set(10, 6, 6);
-  scene.add(light1);
-
-  const light2 = new THREE.PointLight(0x0284c7, 3, 35);
-  light2.position.set(-10, -4, 4);
-  scene.add(light2);
-
-  const light3 = new THREE.PointLight(0x22d3ee, 2, 30);
-  light3.position.set(0, 10, 2);
-  scene.add(light3);
-
-  /* ---- SOAP BUBBLES ---- */
+  // Bubbles — translucent, iridescent, calm
+  const group = new THREE.Group();
+  sc.add(group);
   const bubbles = [];
-  const bubbleCount = window.innerWidth < 768 ? 14 : 28;
+  const N = W < 720 ? 9 : 16;
 
-  for (let i = 0; i < bubbleCount; i++) {
-    const r   = 0.14 + Math.random() * 0.65;
-    const geo = new THREE.SphereGeometry(r, 32, 32);
-
-    const hsl  = new THREE.Color().setHSL(0.53 + Math.random() * 0.14, 0.9, 0.65);
-    const mat  = new THREE.MeshPhongMaterial({
-      color:       hsl,
+  for (let i = 0; i < N; i++) {
+    const r = 0.5 + Math.random() * 1.7;
+    const geo = new THREE.SphereGeometry(r, 48, 48);
+    const col = new THREE.Color().setHSL(0.48 + Math.random() * 0.08, 0.55, 0.6);
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: col,
       transparent: true,
-      opacity:     0.12 + Math.random() * 0.22,
-      shininess:   220,
-      specular:    new THREE.Color(1, 1, 1),
-      side:        THREE.DoubleSide,
+      opacity: 0.32,
+      roughness: 0.05,
+      metalness: 0,
+      transmission: 0.6,
+      clearcoat: 1,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.6,
     });
-
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(
       (Math.random() - 0.5) * 26,
-      (Math.random() - 0.5) * 16 - 8,
-      (Math.random() - 0.5) * 10 - 2
+      (Math.random() - 0.5) * 18,
+      (Math.random() - 0.5) * 10 - 3
     );
-    mesh.userData = {
-      rise:    0.006 + Math.random() * 0.013,
-      wobX:    (Math.random() - 0.5) * 0.018,
-      wobZ:    (Math.random() - 0.5) * 0.009,
-      phase:   Math.random() * Math.PI * 2,
-      rotX:    (Math.random() - 0.5) * 0.012,
-      rotY:    (Math.random() - 0.5) * 0.009,
+    m.userData = {
+      baseX: m.position.x,
+      baseY: m.position.y,
+      drift: 0.12 + Math.random() * 0.2,
+      sp: 0.2 + Math.random() * 0.35,
+      ph: Math.random() * Math.PI * 2,
+      sc: r,
     };
-    scene.add(mesh);
-    bubbles.push(mesh);
+    group.add(m);
+    bubbles.push(m);
   }
 
-  /* ---- CYAN SPARKLE PARTICLES ---- */
-  const pCount = window.innerWidth < 768 ? 300 : 700;
-  const pPos   = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount; i++) {
-    pPos[i * 3]     = (Math.random() - 0.5) * 32;
-    pPos[i * 3 + 1] = (Math.random() - 0.5) * 22;
-    pPos[i * 3 + 2] = (Math.random() - 0.5) * 18 - 3;
+  // subtle sparkle dust
+  const dustN = W < 720 ? 90 : 220;
+  const dpos = new Float32Array(dustN * 3);
+  for (let i = 0; i < dustN; i++) {
+    dpos[i * 3]     = (Math.random() - 0.5) * 30;
+    dpos[i * 3 + 1] = (Math.random() - 0.5) * 20;
+    dpos[i * 3 + 2] = (Math.random() - 0.5) * 12;
   }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
-    color: 0x22d3ee, size: 0.055, transparent: true, opacity: 0.55, sizeAttenuation: true,
+  const dgeo = new THREE.BufferGeometry();
+  dgeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3));
+  const dust = new THREE.Points(dgeo, new THREE.PointsMaterial({
+    color: 0x15a8a3, size: 0.05, transparent: true, opacity: 0.5,
   }));
-  scene.add(particles);
+  sc.add(dust);
 
-  /* ---- WHITE GLITTER PARTICLES ---- */
-  const gCount = window.innerWidth < 768 ? 150 : 350;
-  const gPos   = new Float32Array(gCount * 3);
-  for (let i = 0; i < gCount; i++) {
-    gPos[i * 3]     = (Math.random() - 0.5) * 30;
-    gPos[i * 3 + 1] = (Math.random() - 0.5) * 20;
-    gPos[i * 3 + 2] = (Math.random() - 0.5) * 14;
-  }
-  const gGeo = new THREE.BufferGeometry();
-  gGeo.setAttribute('position', new THREE.BufferAttribute(gPos, 3));
-  const glitter = new THREE.Points(gGeo, new THREE.PointsMaterial({
-    color: 0xffffff, size: 0.04, transparent: true, opacity: 0.45, sizeAttenuation: true,
-  }));
-  scene.add(glitter);
-
-  /* ---- ORBITING RINGS ---- */
-  function makeRing(r, tube, color, opacity) {
-    const geo = new THREE.TorusGeometry(r, tube, 16, 120);
-    const mat = new THREE.MeshPhongMaterial({
-      color, transparent: true, opacity, shininess: 180, specular: new THREE.Color(1,1,1),
-    });
-    return new THREE.Mesh(geo, mat);
-  }
-
-  const ring1 = makeRing(3.2, 0.045, 0x06b6d4, 0.22);
-  ring1.position.set(6, 0.5, -4);
-  ring1.rotation.x = 0.4;
-  scene.add(ring1);
-
-  const ring2 = makeRing(2.2, 0.03, 0x22d3ee, 0.15);
-  ring2.position.set(6, 0.5, -4);
-  ring2.rotation.y = 0.6;
-  scene.add(ring2);
-
-  const ring3 = makeRing(1.3, 0.025, 0x0284c7, 0.28);
-  ring3.position.set(-5, -1, -3);
-  scene.add(ring3);
-
-  /* ---- MOP / CLEANING TOOL (made from basic geometries) ---- */
-  const toolGroup = new THREE.Group();
-
-  // Handle
-  const handleGeo = new THREE.CylinderGeometry(0.07, 0.07, 3.6, 12);
-  const handleMat = new THREE.MeshPhongMaterial({ color: 0x1e6090, shininess: 80 });
-  const handle    = new THREE.Mesh(handleGeo, handleMat);
-  handle.position.y = 1.5;
-  toolGroup.add(handle);
-
-  // Mop head (flat disc)
-  const headGeo = new THREE.CylinderGeometry(0.7, 0.55, 0.18, 20);
-  const headMat = new THREE.MeshPhongMaterial({ color: 0x06b6d4, shininess: 120 });
-  const head    = new THREE.Mesh(headGeo, headMat);
-  head.position.y = -0.3;
-  toolGroup.add(head);
-
-  // Bucket
-  const bucketGeo = new THREE.CylinderGeometry(0.5, 0.38, 0.75, 18, 1, true);
-  const bucketMat = new THREE.MeshPhongMaterial({
-    color: 0x0ea5e9, shininess: 150, side: THREE.DoubleSide,
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  window.addEventListener('mousemove', e => {
+    if (window.scrollY > H) return;
+    tx = (e.clientX / W - 0.5);
+    ty = (e.clientY / H - 0.5);
   });
-  const bucket    = new THREE.Mesh(bucketGeo, bucketMat);
-  bucket.position.set(-1.3, -2.2, 0);
-  toolGroup.add(bucket);
 
-  const bucketBase = new THREE.Mesh(
-    new THREE.CircleGeometry(0.38, 18),
-    new THREE.MeshPhongMaterial({ color: 0x0ea5e9, shininess: 150 })
-  );
-  bucketBase.rotation.x = -Math.PI / 2;
-  bucketBase.position.set(-1.3, -2.575, 0);
-  toolGroup.add(bucketBase);
-
-  toolGroup.position.set(5.5, 0, -2);
-  toolGroup.rotation.z = -0.18;
-  scene.add(toolGroup);
-
-  /* ---- ANIMATION LOOP ---- */
   const clock = new THREE.Clock();
-  let targetX = 0, targetY = 0;
+  function loop() {
+    requestAnimationFrame(loop);
+    const t = reduce ? 0 : clock.getElapsedTime();
 
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    // Bubbles
     bubbles.forEach(b => {
-      b.position.y += b.userData.rise;
-      b.position.x += Math.sin(t * 0.55 + b.userData.phase) * b.userData.wobX;
-      b.position.z += Math.cos(t * 0.35 + b.userData.phase) * b.userData.wobZ;
-      b.rotation.x += b.userData.rotX;
-      b.rotation.y += b.userData.rotY;
-      if (b.position.y > 10) {
-        b.position.y = -10;
-        b.position.x = (Math.random() - 0.5) * 26;
-      }
+      const u = b.userData;
+      b.position.y = u.baseY + Math.sin(t * u.sp + u.ph) * u.drift * 6;
+      b.position.x = u.baseX + Math.cos(t * u.sp * 0.7 + u.ph) * u.drift * 3;
+      b.rotation.y = t * 0.15;
+      const pulse = 1 + Math.sin(t * 0.8 + u.ph) * 0.03;
+      b.scale.setScalar(pulse);
     });
+    dust.rotation.y = t * 0.03;
 
-    // Particles
-    particles.rotation.y = t * 0.045;
-    particles.rotation.x = t * 0.02;
-    glitter.rotation.y   = -t * 0.032;
-    glitter.rotation.x   =  t * 0.015;
+    mx += (tx - mx) * 0.05;
+    my += (ty - my) * 0.05;
+    group.rotation.y = mx * 0.4;
+    group.rotation.x = my * 0.3;
+    cam.position.x = mx * 2;
+    cam.position.y = -my * 1.4;
+    cam.lookAt(sc.position);
 
-    // Rings
-    ring1.rotation.x = 0.4 + t * 0.22;
-    ring1.rotation.z =       t * 0.16;
-    ring2.rotation.y = 0.6 + t * 0.28;
-    ring2.rotation.x =       t * 0.12;
-    ring3.rotation.z =       t * 0.2;
-    ring3.rotation.y =       t * 0.15;
-
-    // Lights orbit
-    light1.position.x = Math.sin(t * 0.5)  * 10;
-    light1.position.y = Math.cos(t * 0.35) * 6;
-    light2.position.x = Math.cos(t * 0.4)  * -10;
-    light2.position.y = Math.sin(t * 0.55) * -4;
-
-    // Mop tool float
-    toolGroup.position.y = Math.sin(t * 0.9) * 0.4;
-    toolGroup.rotation.z = -0.18 + Math.sin(t * 0.7) * 0.06;
-
-    // Mouse parallax (smooth)
-    camera.position.x += (targetX - camera.position.x) * 0.04;
-    camera.position.y += (targetY - camera.position.y) * 0.04;
-    camera.lookAt(scene.position);
-
-    renderer.render(scene, camera);
+    renderer.render(sc, cam);
   }
-  animate();
+  loop();
 
-  /* Resize */
   window.addEventListener('resize', () => {
-    const w = window.innerWidth, h = window.innerHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  });
-
-  /* Mouse parallax — only in hero viewport */
-  document.addEventListener('mousemove', e => {
-    if (window.scrollY > window.innerHeight) return;
-    targetX =  (e.clientX / window.innerWidth  - 0.5) * 2.5;
-    targetY = -(e.clientY / window.innerHeight - 0.5) * 1.8;
+    W = window.innerWidth; H = window.innerHeight;
+    cam.aspect = W / H; cam.updateProjectionMatrix();
+    renderer.setSize(W, H);
   });
 })();
 
 
-/* --- NAVBAR SCROLL --- */
-const navbar = document.getElementById('navbar');
-function updateNav() {
-  if (window.scrollY > 60) navbar.classList.add('scrolled');
-  else                      navbar.classList.remove('scrolled');
-}
-window.addEventListener('scroll', updateNav, { passive: true });
-updateNav();
+/* ---------- NAV scroll state ---------- */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 
-/* --- MOBILE MENU --- */
-const navToggle = document.getElementById('nav-toggle');
-const navLinks  = document.getElementById('nav-links');
-
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+/* ---------- Mobile menu ---------- */
+const burger = document.getElementById('burger');
+const links = document.getElementById('navLinks');
+burger.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => links.classList.remove('open'))
+);
 
 
-/* --- SCROLL-TRIGGERED ANIMATIONS --- */
-const animateEls = document.querySelectorAll('[data-animate]');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (!entry.isIntersecting) return;
-    /* stagger siblings */
-    const siblings = Array.from(
-      entry.target.parentElement.querySelectorAll('[data-animate]')
-    );
-    const idx = siblings.indexOf(entry.target);
-    setTimeout(() => entry.target.classList.add('in'), idx * 110);
-    revealObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.12 });
-
-animateEls.forEach(el => revealObserver.observe(el));
-
-
-/* --- 3D TILT EFFECT ON SERVICE CARDS --- */
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width  - 0.5;
-    const y = (e.clientY - rect.top)  / rect.height - 0.5;
-    card.style.transform = `translateY(-8px) rotateX(${-y * 9}deg) rotateY(${x * 9}deg)`;
-    card.style.transition = 'transform .08s ease';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.transition = 'transform .5s ease';
-  });
-});
-
-
-/* --- STATS COUNTER ANIMATION --- */
-function animateCount(el, target, duration) {
-  let start = null;
-  function step(ts) {
-    if (!start) start = ts;
-    const progress = Math.min((ts - start) / duration, 1);
-    el.textContent  = Math.floor(progress * target);
-    if (progress < 1) requestAnimationFrame(step);
-    else              el.textContent = target;
-  }
-  requestAnimationFrame(step);
-}
-
-const statNums = document.querySelectorAll('.stat-num[data-count]');
-const statsObserver = new IntersectionObserver(entries => {
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
-    const el     = entry.target;
-    const target = parseInt(el.dataset.count, 10);
-    animateCount(el, target, 1400);
-    statsObserver.unobserve(el);
+    const sibs = Array.from(
+      entry.target.parentElement.querySelectorAll(':scope > [data-reveal]')
+    );
+    const i = Math.max(0, sibs.indexOf(entry.target));
+    setTimeout(() => entry.target.classList.add('in'), i * 90);
+    io.unobserve(entry.target);
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 
-statNums.forEach(el => statsObserver.observe(el));
-
-
-/* --- ABOUT CARD MOUSE-TILT --- */
-const aboutCard = document.getElementById('about-card');
-if (aboutCard) {
-  const parent = aboutCard.parentElement;
-  parent.addEventListener('mousemove', e => {
-    const rect = aboutCard.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width  - 0.5;
-    const y = (e.clientY - rect.top)  / rect.height - 0.5;
-    aboutCard.style.transform = `perspective(800px) rotateY(${x * -12}deg) rotateX(${y * 8}deg)`;
-    aboutCard.style.transition = 'transform .08s ease';
-  });
-  parent.addEventListener('mouseleave', () => {
-    aboutCard.style.transform = '';
-    aboutCard.style.transition = 'transform .5s ease';
-  });
-}
-
-
-/* --- CONTACT FORM --- */
-const form      = document.getElementById('contact-form');
-const submitBtn = document.getElementById('submit-btn');
-
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    submitBtn.textContent   = 'Request Sent! ✓';
-    submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-    submitBtn.style.boxShadow  = '0 6px 24px rgba(16,185,129,.45)';
-    submitBtn.disabled         = true;
-    setTimeout(() => {
-      submitBtn.textContent      = 'Send Request';
-      submitBtn.style.background = '';
-      submitBtn.style.boxShadow  = '';
-      submitBtn.disabled         = false;
-      form.reset();
-    }, 3500);
-  });
-}
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));

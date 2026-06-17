@@ -3,533 +3,238 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squeaky Clean Is My Thing | Professional Cleaning — Topeka, KS</title>
-  <meta name="description" content="Professional home cleaning in Topeka, KS. I don't cut corners, I clean them. Call Leslie at 785-414-2442.">
+  <title>Squeaky Clean — Professional Home Cleaning in Topeka, KS</title>
+  <meta name="description" content="Professional home cleaning in Topeka, Kansas by Leslie. I don't cut corners, I clean them. Call 785-414-2442.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">
-        <span class="logo-icon">✦</span>
-        <span class="logo-text">Squeaky Clean</span>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Squeaky&nbsp;Clean
       </a>
-      <div class="nav-links" id="nav-links">
+      <nav class="nav-links" id="navLinks">
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#reviews">Reviews</a>
         <a href="#pricing">Pricing</a>
-        <a href="#contact" class="nav-cta">Book Now</a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <a href="#reviews">Reviews</a>
+      </nav>
+      <a href="tel:7854142442" class="nav-phone">785&#8209;414&#8209;2442</a>
+      <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
     </div>
-  </nav>
+  </header>
 
   <!-- HERO -->
-  <section class="hero" id="home">
-    <canvas id="hero-canvas"></canvas>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badge">&#10022; Based in Topeka, Kansas</div>
-      <h1 class="hero-title">
-        <span class="line">Your Home,</span>
-        <span class="line accent">Spotlessly Clean.</span>
-      </h1>
-      <p class="hero-subtitle">
-        Professional cleaning with heart. I don't just clean &mdash; I care.<br>
-        Making homes feel fresh, welcoming, and stress&#8209;free.
+  <section class="hero" id="top">
+    <canvas id="scene"></canvas>
+    <div class="wrap hero-inner">
+      <div class="hero-eyebrow">Topeka, Kansas</div>
+      <h1 class="hero-title">A cleaner home,<br><em>without the worry.</em></h1>
+      <p class="hero-lede">
+        Professional, detail-obsessed home cleaning by Leslie.
+        I don't just clean — I care.
       </p>
-      <p class="hero-tagline">&ldquo;I don't cut corners, I clean them&rdquo;</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Book a Cleaning</a>
-        <a href="#services" class="btn btn-ghost">See Services</a>
+      <div class="hero-cta">
+        <a href="tel:7854142442" class="btn btn-dark">Call 785-414-2442</a>
+        <a href="#services" class="btn btn-line">Explore services</a>
       </div>
-      <a href="tel:7854142442" class="hero-phone">&#128222;&nbsp; 785-414-2442</a>
+      <p class="hero-note">&ldquo;I don't cut corners, I clean them.&rdquo;</p>
     </div>
-    <div class="scroll-hint">
-      <div class="scroll-dot"></div>
-    </div>
+    <div class="hero-scroll" aria-hidden="true"><span></span></div>
   </section>
 
-  <!-- STATS BAR -->
-  <section class="stats-bar">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-num" data-count="100">0</div><span class="stat-sym">%</span>
-          <div class="stat-label">Satisfaction Guaranteed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">5</div><span class="stat-sym">&#9733;</span>
-          <div class="stat-label">Average Rating</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" data-count="50">0</div><span class="stat-sym">+</span>
-          <div class="stat-label">Happy Clients</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">0</div>
-          <div class="stat-label">Corners Cut</div>
-        </div>
-      </div>
+  <!-- MARQUEE STRIP -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>Kitchens</span><i>&bull;</i><span>Bathrooms</span><i>&bull;</i><span>Bedrooms</span><i>&bull;</i>
+      <span>Living spaces</span><i>&bull;</i><span>Deep cleans</span><i>&bull;</i><span>Move-outs</span><i>&bull;</i>
+      <span>Kitchens</span><i>&bull;</i><span>Bathrooms</span><i>&bull;</i><span>Bedrooms</span><i>&bull;</i>
+      <span>Living spaces</span><i>&bull;</i><span>Deep cleans</span><i>&bull;</i><span>Move-outs</span><i>&bull;</i>
     </div>
-  </section>
+  </div>
 
   <!-- SERVICES -->
-  <section class="services-section" id="services">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What I Offer</span>
-        <h2 class="section-title">Cleaning Services</h2>
-        <p class="section-sub">From regular maintenance to a full deep clean &mdash; tailored to your home's needs.</p>
+  <section class="services section" id="services">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="kicker">Services</span>
+        <h2 class="h2">Three ways to a spotless home</h2>
       </div>
-      <div class="services-grid">
 
-        <div class="service-card" data-tilt>
-          <div class="service-card-inner">
-            <div class="svc-icon">&#127968;</div>
-            <h3>Standard Cleaning</h3>
-            <p>Complete home cleaning covering all main areas with professional care and attention to detail.</p>
-            <div class="room-tags">
-              <span>Kitchen</span><span>Bathrooms</span><span>Living Room</span><span>Bedrooms</span>
-            </div>
-            <a href="#contact" class="svc-link">Get a Quote <span>&rarr;</span></a>
-          </div>
-        </div>
-
-        <div class="service-card featured" data-tilt>
-          <div class="svc-badge">Most Popular</div>
-          <div class="service-card-inner">
-            <div class="svc-icon">&#10024;</div>
-            <h3>Deep Cleaning</h3>
-            <p>Everything in standard cleaning, PLUS intensive attention to every surface, corner, and crevice.</p>
-            <div class="room-tags">
-              <span>All Standard Areas</span><span>Windows</span><span>Ceiling Fans</span><span>Walls &amp; Doors</span>
-            </div>
-            <a href="#contact" class="svc-link">Get a Quote <span>&rarr;</span></a>
-          </div>
-        </div>
-
-        <div class="service-card" data-tilt>
-          <div class="service-card-inner">
-            <div class="svc-icon">&#10133;</div>
-            <h3>Add-On Services</h3>
-            <p>Customize your clean with extras for those special areas that need a little more attention.</p>
-            <div class="room-tags">
-              <span>Fridge Interior</span><span>Oven Interior</span><span>Cabinets</span><span>Blinds</span>
-            </div>
-            <a href="#contact" class="svc-link">Get a Quote <span>&rarr;</span></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CHECKLIST -->
-  <section class="checklist-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What's Included</span>
-        <h2 class="section-title">Standard Cleaning Checklist</h2>
-      </div>
-      <div class="checklist-grid">
-
-        <div class="check-card" data-animate>
-          <div class="check-icon">&#127859;</div>
-          <h3>Kitchen</h3>
-          <ul>
-            <li>Microwave exterior &amp; interior cleaned</li>
-            <li>Countertops wiped and sanitized</li>
-            <li>Floors cleaned and mopped</li>
+      <div class="svc-grid">
+        <article class="svc" data-reveal>
+          <div class="svc-no">01</div>
+          <h3>Standard Clean</h3>
+          <p>Regular upkeep across every main room — kitchen, bathrooms, living areas and bedrooms. Done thoroughly, every time.</p>
+          <ul class="svc-list">
+            <li>Surfaces, floors &amp; mirrors</li>
+            <li>Bathrooms disinfected</li>
+            <li>Dusting &amp; vacuuming</li>
             <li>Trash emptied</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="check-card" data-animate>
-          <div class="check-icon">&#128703;</div>
-          <h3>Bathrooms</h3>
-          <ul>
-            <li>Toilets disinfected inside and out</li>
-            <li>Sinks scrubbed and disinfected</li>
-            <li>Floors cleaned</li>
-            <li>Trash emptied</li>
-            <li>Mirrors cleaned to a shine</li>
+        <article class="svc svc-feature" data-reveal>
+          <div class="svc-tag">Most chosen</div>
+          <div class="svc-no">02</div>
+          <h3>Deep Clean</h3>
+          <p>Everything in a standard clean, taken further — into the corners, the crevices and the places that get missed.</p>
+          <ul class="svc-list">
+            <li>Windows &amp; sills (if reachable)</li>
+            <li>Ceiling fans (if reachable)</li>
+            <li>Spot-cleaned walls &amp; doors</li>
+            <li>Blinds &amp; exterior surfaces</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="check-card" data-animate>
-          <div class="check-icon">&#128715;</div>
-          <h3>Living Room</h3>
-          <ul>
-            <li>Cushions &amp; pillows fluffed</li>
-            <li>Picture frames dusted</li>
-            <li>Furniture dusted</li>
-            <li>Floors vacuumed</li>
-            <li>Hallways &amp; stairs vacuumed</li>
-            <li>Carpets vacuumed</li>
-            <li>Trash emptied</li>
+        <article class="svc" data-reveal>
+          <div class="svc-no">03</div>
+          <h3>Add-Ons</h3>
+          <p>Clean your way. Add any of these to a standard or one-time visit whenever you need a little extra.</p>
+          <ul class="svc-list">
+            <li>Refrigerator interior</li>
+            <li>Oven interior</li>
+            <li>Cabinets, inside &amp; out</li>
+            <li>Blinds</li>
           </ul>
-        </div>
-
-        <div class="check-card" data-animate>
-          <div class="check-icon">&#128716;</div>
-          <h3>Bedrooms</h3>
-          <ul>
-            <li>Beds made (linens changed on request)</li>
-            <li>Picture frames dusted</li>
-            <li>Furniture dusted — top, front &amp; underneath</li>
-            <li>Floors vacuumed &amp; washed (under bed if accessible)</li>
-            <li>Windowsills cleaned (blinds dusted on request)</li>
-            <li>Trash emptied</li>
-            <li>Mirrors cleaned</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- DEEP CLEAN BANNER -->
-  <section class="deep-banner">
-    <div class="container">
-      <div class="deep-card">
-        <div class="deep-content">
-          <span class="section-tag light">Go Deeper</span>
-          <h2>Deep Cleaning Extras</h2>
-          <p>Everything in standard cleaning, plus these intensive additions:</p>
-          <div class="extras-grid">
-            <div class="extra-row"><span class="ex-icon">&#128139;</span>Clean windows (if reachable)</div>
-            <div class="extra-row"><span class="ex-icon">&#127752;</span>Ceiling fans (if reachable)</div>
-            <div class="extra-row"><span class="ex-icon">&#129529;</span>Spot cleaning walls</div>
-            <div class="extra-row"><span class="ex-icon">&#128683;</span>Wipe doors &amp; frames</div>
-            <div class="extra-row"><span class="ex-icon">&#128705;</span>Wipe blinds</div>
-            <div class="extra-row"><span class="ex-icon">&#128163;</span>Exterior surfaces</div>
-          </div>
-        </div>
-        <div class="deep-visual" aria-hidden="true">
-          <div class="sparkle-orbit">
-            <div class="orb-ring r1"></div>
-            <div class="orb-ring r2"></div>
-            <div class="orb-ring r3"></div>
-            <div class="orb-center">&#10024;</div>
-            <div class="orb-label">Deep Clean</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADD-ONS -->
-  <section class="addons-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Extra Clean Your Way</span>
-        <h2 class="section-title">Add-On Services</h2>
-        <p class="section-sub">Add any of these to your regular or one-time cleaning, upon request.</p>
-      </div>
-      <div class="addons-grid">
-        <div class="addon-card" data-animate>
-          <div class="addon-icon">&#10052;&#65039;</div>
-          <h3>Refrigerator Interior</h3>
-          <p>Deep clean inside your fridge — shelves, drawers, and all surfaces.</p>
-        </div>
-        <div class="addon-card" data-animate>
-          <div class="addon-icon">&#128293;</div>
-          <h3>Oven Interior</h3>
-          <p>Tackle tough grease and baked-on residue inside your oven.</p>
-        </div>
-        <div class="addon-card" data-animate>
-          <div class="addon-icon">&#128689;</div>
-          <h3>Cabinet Cleaning</h3>
-          <p>Interior and exterior cabinet surfaces cleaned and sanitized.</p>
-        </div>
-        <div class="addon-card" data-animate>
-          <div class="addon-icon">&#128705;</div>
-          <h3>Blinds</h3>
-          <p>Individual slat cleaning to remove dust and buildup from your blinds.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="about-section" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-visual" aria-hidden="true">
-          <div class="about-card" id="about-card">
-            <div class="ac-glow"></div>
-            <div class="ac-icon">&#10022;</div>
-            <div class="ac-badge b1">Reliable</div>
-            <div class="ac-badge b2">Detail-Oriented</div>
-            <div class="ac-badge b3">Caring</div>
-          </div>
-        </div>
-        <div class="about-content">
-          <span class="section-tag">Meet Leslie</span>
-          <h2 class="section-title">Squeaky Clean<br>Is My Thing</h2>
-          <p>I'm a reliable cleaning professional with strong experience in the cleaning field. I have great attention to detail and high cleaning standards.</p>
-          <p>I don't just clean &mdash; I care. I take pride in making homes feel fresh, welcoming, and stress-free so families can truly relax.</p>
-          <div class="about-features">
-            <div class="af-item"><div class="af-check">&#10003;</div>Meticulous attention to detail</div>
-            <div class="af-item"><div class="af-check">&#10003;</div>High professional standards</div>
-            <div class="af-item"><div class="af-check">&#10003;</div>Reliable &amp; trustworthy</div>
-            <div class="af-item"><div class="af-check">&#10003;</div>Family &amp; pet friendly</div>
-          </div>
-          <a href="tel:7854142442" class="btn btn-primary">Call Leslie Today</a>
+  <section class="about section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-visual" data-reveal>
+        <div class="about-frame">
+          <div class="about-mark" aria-hidden="true"></div>
+          <div class="about-stat"><strong>100%</strong><span>satisfaction</span></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="reviews-section" id="reviews">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag light">Client Stories</span>
-        <h2 class="section-title light">What People Are Saying</h2>
-      </div>
-      <div class="reviews-grid">
-
-        <div class="review-card" data-animate>
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"Leslie is absolutely incredible. My home has never been this clean. She pays attention to every little detail and truly goes above and beyond every single visit."</p>
-          <div class="reviewer">
-            <div class="rev-avatar">SM</div>
-            <div>
-              <div class="rev-name">Sarah M.</div>
-              <div class="rev-loc">Topeka, KS</div>
-            </div>
-          </div>
+      <div class="about-body" data-reveal>
+        <span class="kicker">Meet Leslie</span>
+        <h2 class="h2">Squeaky clean<br>is my thing.</h2>
+        <p>I'm a reliable cleaning professional with strong experience and high standards. I take pride in making homes feel fresh, welcoming and stress-free, so families can simply relax.</p>
+        <p class="about-quote">&ldquo;I don't just clean — I care.&rdquo;</p>
+        <div class="about-points">
+          <div><span class="dot"></span>Meticulous attention to detail</div>
+          <div><span class="dot"></span>Reliable &amp; trustworthy</div>
+          <div><span class="dot"></span>Family &amp; pet friendly</div>
         </div>
-
-        <div class="review-card featured" data-animate>
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"Best cleaning service in Topeka! She truly lives up to her motto — I don't cut corners, I clean them. My kitchen sparkled like it was brand new when she finished."</p>
-          <div class="reviewer">
-            <div class="rev-avatar">MG</div>
-            <div>
-              <div class="rev-name">Maria G.</div>
-              <div class="rev-loc">Topeka, KS</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="review-card" data-animate>
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>"Extremely professional and thorough. She cleaned areas I didn't even think about. My whole family feels so much more comfortable and relaxed in our home now."</p>
-          <div class="reviewer">
-            <div class="rev-avatar">JT</div>
-            <div>
-              <div class="rev-name">James T.</div>
-              <div class="rev-loc">Topeka, KS</div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section class="pricing-section" id="pricing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Packages</span>
-        <h2 class="section-title">Cleaning Packages</h2>
-        <p class="section-sub">Custom quotes based on your home's size and specific needs. Contact Leslie for pricing.</p>
+  <section class="pricing section" id="pricing">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="kicker">Pricing</span>
+        <h2 class="h2">Simple, honest pricing</h2>
+        <p class="head-sub">Every home is different. Reach out for a quick, no-pressure quote tailored to your space.</p>
       </div>
-      <div class="pricing-grid">
 
-        <div class="price-card" data-animate>
-          <div class="price-header">
-            <div class="price-icon">&#127968;</div>
-            <h3>Standard Clean</h3>
-            <p>Perfect for regular home maintenance</p>
-          </div>
-          <ul class="price-features">
-            <li>Kitchen cleaning</li>
-            <li>Bathroom disinfecting</li>
-            <li>Living room cleaning</li>
-            <li>Bedroom cleaning</li>
-            <li>Vacuuming &amp; mopping</li>
-            <li>Trash removal</li>
+      <div class="price-grid">
+        <article class="price" data-reveal>
+          <h3>Standard</h3>
+          <p class="price-for">Recurring or one-time upkeep.</p>
+          <ul>
+            <li>Kitchen &amp; bathrooms</li>
+            <li>Bedrooms &amp; living areas</li>
+            <li>Floors, dusting &amp; trash</li>
           </ul>
-          <a href="#contact" class="btn btn-outline btn-full">Get a Quote</a>
-        </div>
+          <a href="tel:7854142442" class="price-link">Get a quote &rarr;</a>
+        </article>
 
-        <div class="price-card featured" data-animate>
-          <div class="price-badge">Best Value</div>
-          <div class="price-header">
-            <div class="price-icon">&#10024;</div>
-            <h3>Deep Clean</h3>
-            <p>The ultimate fresh start for your home</p>
-          </div>
-          <ul class="price-features">
+        <article class="price price-feature" data-reveal>
+          <div class="price-badge">Best value</div>
+          <h3>Deep Clean</h3>
+          <p class="price-for">A full reset, top to bottom.</p>
+          <ul>
             <li>Everything in Standard</li>
-            <li>Window cleaning</li>
-            <li>Ceiling fans</li>
-            <li>Spot wall &amp; door cleaning</li>
-            <li>Blinds wiped</li>
-            <li>Exterior surfaces</li>
+            <li>Windows, fans &amp; blinds</li>
+            <li>Walls, doors &amp; exteriors</li>
           </ul>
-          <a href="#contact" class="btn btn-primary btn-full">Get a Quote</a>
-        </div>
+          <a href="tel:7854142442" class="price-link price-link-light">Get a quote &rarr;</a>
+        </article>
 
-        <div class="price-card" data-animate>
-          <div class="price-header">
-            <div class="price-icon">&#9881;&#65039;</div>
-            <h3>Custom Package</h3>
-            <p>Tailored entirely to your needs</p>
-          </div>
-          <ul class="price-features">
-            <li>Standard or Deep Clean base</li>
-            <li>+ Fridge interior</li>
-            <li>+ Oven interior</li>
-            <li>+ Cabinet cleaning</li>
-            <li>+ Blind cleaning</li>
-            <li>Any combination</li>
+        <article class="price" data-reveal>
+          <h3>Custom</h3>
+          <p class="price-for">Built around your needs.</p>
+          <ul>
+            <li>Standard or deep base</li>
+            <li>Any add-ons you like</li>
+            <li>Fridge, oven, cabinets</li>
           </ul>
-          <a href="#contact" class="btn btn-outline btn-full">Get a Quote</a>
-        </div>
-
+          <a href="tel:7854142442" class="price-link">Get a quote &rarr;</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT / BOOKING -->
-  <section class="contact-section" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <span class="section-tag">Get in Touch</span>
-          <h2 class="section-title">Book Your Clean</h2>
-          <p>Ready for a spotlessly clean home? Reach out today and let's get started!</p>
-
-          <div class="cinfo-list">
-            <div class="cinfo-item">
-              <div class="cinfo-icon">&#128222;</div>
-              <div>
-                <div class="cinfo-label">Phone / Text</div>
-                <a href="tel:7854142442" class="cinfo-val">785-414-2442</a>
-              </div>
-            </div>
-            <div class="cinfo-item">
-              <div class="cinfo-icon">&#9993;&#65039;</div>
-              <div>
-                <div class="cinfo-label">Email</div>
-                <a href="mailto:squeakycleanismything@gmail.com" class="cinfo-val">squeakycleanismything@gmail.com</a>
-              </div>
-            </div>
-            <div class="cinfo-item">
-              <div class="cinfo-icon">&#128205;</div>
-              <div>
-                <div class="cinfo-label">Service Area</div>
-                <div class="cinfo-val">Topeka, Kansas</div>
-              </div>
-            </div>
-          </div>
-
-          <blockquote class="contact-quote">
-            &ldquo;I don't cut corners, I clean them&rdquo;
-            <cite>&mdash; Leslie</cite>
-          </blockquote>
-        </div>
-
-        <div class="contact-form-wrap">
-          <form id="contact-form" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" placeholder="Your first name" required>
-              </div>
-              <div class="form-group">
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" placeholder="Your last name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" placeholder="your@email.com" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" placeholder="(785) 000-0000">
-            </div>
-            <div class="form-group">
-              <label for="service">Service Type</label>
-              <select id="service" required>
-                <option value="">Select a service&hellip;</option>
-                <option value="standard">Standard Cleaning</option>
-                <option value="deep">Deep Cleaning</option>
-                <option value="custom">Custom Package</option>
-                <option value="one-time">One-Time Cleaning</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="size">Home Size</label>
-                <select id="size">
-                  <option value="">Select size&hellip;</option>
-                  <option value="1-2br">1&ndash;2 Bedrooms</option>
-                  <option value="3-4br">3&ndash;4 Bedrooms</option>
-                  <option value="5+br">5+ Bedrooms</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="date">Preferred Date</label>
-                <input type="date" id="date">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="notes">Additional Notes</label>
-              <textarea id="notes" rows="4" placeholder="Any special requests or areas to focus on?"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submit-btn">Send Request</button>
-          </form>
-        </div>
+  <!-- REVIEWS -->
+  <section class="reviews section" id="reviews">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <span class="kicker">Reviews</span>
+        <h2 class="h2">Loved by homes in Topeka</h2>
       </div>
+      <div class="rev-grid">
+        <figure class="rev" data-reveal>
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>My home has never been this clean. Leslie notices every little detail and goes above and beyond every visit.</blockquote>
+          <figcaption><strong>Sarah M.</strong> Topeka, KS</figcaption>
+        </figure>
+        <figure class="rev" data-reveal>
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>She truly lives up to her motto. My kitchen sparkled like it was brand new. Best in town.</blockquote>
+          <figcaption><strong>Maria G.</strong> Topeka, KS</figcaption>
+        </figure>
+        <figure class="rev" data-reveal>
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Professional and thorough. She cleaned spots I never think about. The whole family feels more relaxed.</blockquote>
+          <figcaption><strong>James T.</strong> Topeka, KS</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="contact section" id="contact">
+    <div class="wrap contact-inner" data-reveal>
+      <span class="kicker kicker-light">Get in touch</span>
+      <h2 class="contact-title">Ready for a home<br>that feels brand new?</h2>
+      <p class="contact-sub">Call or email Leslie directly — no forms, no waiting.</p>
+
+      <div class="contact-methods">
+        <a href="tel:7854142442" class="cm">
+          <span class="cm-label">Call or text</span>
+          <span class="cm-value">785-414-2442</span>
+        </a>
+        <a href="mailto:squeakycleanismything@gmail.com" class="cm">
+          <span class="cm-label">Email</span>
+          <span class="cm-value">squeakycleanismything@gmail.com</span>
+        </a>
+      </div>
+      <p class="contact-loc">Serving Topeka, Kansas &amp; surrounding areas</p>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-icon">&#10022;</span>
-            Squeaky Clean Is My Thing
-          </div>
-          <p>Professional cleaning services in Topeka, KS.<br>Making your home shine with care and dedication.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="#services">Standard Cleaning</a>
-          <a href="#services">Deep Cleaning</a>
-          <a href="#services">Add-On Services</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="tel:7854142442">785-414-2442</a>
-          <a href="mailto:squeakycleanismything@gmail.com">squeakycleanismything@gmail.com</a>
-          <span>Topeka, Kansas</span>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Squeaky Clean Is My Thing. All rights reserved.</p>
-        <p class="footer-motto">&ldquo;I don't cut corners, I clean them&rdquo; &mdash; Leslie</p>
-      </div>
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <a href="#top" class="brand brand-foot">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Squeaky&nbsp;Clean
+      </a>
+      <p class="foot-motto">&ldquo;I don't cut corners, I clean them.&rdquo;</p>
+      <p class="foot-copy">&copy; 2025 Squeaky Clean Is My Thing &middot; Topeka, KS</p>
     </div>
   </footer>
 
