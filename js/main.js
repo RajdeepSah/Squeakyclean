@@ -18,35 +18,38 @@
   const cam = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
   cam.position.z = 16;
 
-  // Soft, warm light to match the bone palette
-  sc.add(new THREE.AmbientLight(0xffffff, 1.1));
+  // Lighting for pink-purple palette
+  sc.add(new THREE.AmbientLight(0xfff0ff, 1.2));
   const key = new THREE.DirectionalLight(0xffffff, 1.4);
   key.position.set(6, 8, 10);
   sc.add(key);
-  const teal = new THREE.PointLight(0x15a8a3, 4, 40);
-  teal.position.set(-8, -2, 6);
-  sc.add(teal);
+  const pink = new THREE.PointLight(0xc026d3, 5, 40);
+  pink.position.set(-8, -2, 6);
+  sc.add(pink);
+  const pink2 = new THREE.PointLight(0xe879f9, 3, 35);
+  pink2.position.set(8, 4, 4);
+  sc.add(pink2);
 
-  // Bubbles — translucent, iridescent, calm
+  // Bubbles — vivid pink-purple, highly visible
   const group = new THREE.Group();
   sc.add(group);
   const bubbles = [];
-  const N = W < 720 ? 9 : 16;
+  const N = W < 720 ? 12 : 20;
 
   for (let i = 0; i < N; i++) {
-    const r = 0.5 + Math.random() * 1.7;
+    const r = 0.6 + Math.random() * 2.0;
     const geo = new THREE.SphereGeometry(r, 48, 48);
-    const col = new THREE.Color().setHSL(0.48 + Math.random() * 0.08, 0.55, 0.6);
+    const col = new THREE.Color().setHSL(0.78 + Math.random() * 0.14, 0.72, 0.72);
     const mat = new THREE.MeshPhysicalMaterial({
       color: col,
       transparent: true,
-      opacity: 0.32,
-      roughness: 0.05,
+      opacity: 0.65,
+      roughness: 0.04,
       metalness: 0,
-      transmission: 0.6,
+      transmission: 0.35,
       clearcoat: 1,
-      clearcoatRoughness: 0.1,
-      reflectivity: 0.6,
+      clearcoatRoughness: 0.08,
+      reflectivity: 0.8,
     });
     const m = new THREE.Mesh(geo, mat);
     m.position.set(
@@ -66,8 +69,8 @@
     bubbles.push(m);
   }
 
-  // subtle sparkle dust
-  const dustN = W < 720 ? 90 : 220;
+  // sparkle dust — pink-purple shimmer
+  const dustN = W < 720 ? 120 : 280;
   const dpos = new Float32Array(dustN * 3);
   for (let i = 0; i < dustN; i++) {
     dpos[i * 3]     = (Math.random() - 0.5) * 30;
@@ -77,7 +80,7 @@
   const dgeo = new THREE.BufferGeometry();
   dgeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3));
   const dust = new THREE.Points(dgeo, new THREE.PointsMaterial({
-    color: 0x15a8a3, size: 0.05, transparent: true, opacity: 0.5,
+    color: 0xe879f9, size: 0.09, transparent: true, opacity: 0.65,
   }));
   sc.add(dust);
 
@@ -87,6 +90,12 @@
     tx = (e.clientX / W - 0.5);
     ty = (e.clientY / H - 0.5);
   });
+  window.addEventListener('touchmove', e => {
+    if (window.scrollY > H) return;
+    const touch = e.touches[0];
+    tx = (touch.clientX / W - 0.5);
+    ty = (touch.clientY / H - 0.5);
+  }, { passive: true });
 
   const clock = new THREE.Clock();
   function loop() {
